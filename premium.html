@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraPlay - Premium Plans</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: hsl(195, 38%, 19%); /* Highlight color */
+        }
+
+        /* Main Content Area */
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px; /* Space for fixed nav */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #00BFFF; /* Accent color */
+        }
+
+        /* Subscription Plans */
+        .plans {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .plan-card {
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            flex: 1 1 300px; /* Responsive */
+            max-width: 300px; /* Limit max width */
+        }
+
+        .plan-card h2 {
+            margin-top: 0;
+            color: #00BFFF; /* Highlight color */
+        }
+
+        .price {
+            font-size: 2rem;
+            color: #4FC3F7; /* Light blue for price */
+            margin: 10px 0;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px 0;
+            color: #ffffff; /* White text for features */
+        }
+
+        .features li {
+            margin: 5px 0;
+        }
+
+        .subscribe-button {
+            background-color: #41565f; /* Light blue button */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Make it block level */
+        }
+
+        .subscribe-button:hover {
+            background-color: #29B6F6; /* Darker blue on hover */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="ap-logo.png" alt="AstraPlay Logo" class="nav-logo" />
+        <div class="nav-links">
+            <a href="landingpg.html">Home</a>
+            <a href="premium.html">Premium</a>
+            <a href="#abou">About</a>
+            <a href="#contac">Contact</a>
+        </div>
+    </nav>
+
+    <div class="main">
+        <h1>Premium Plans</h1>
+        <div class="plans">
+            <div class="plan-card">
+                <h2>Basic Plan</h2>
+                <div class="price">$9.99/month</div>
+                <ul class="features">
+                    <li>Access to basic features</li>
+                    <li>Stream ad-free</li>
+                    <li>Unlimited skips</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+            </div>
+
+            <div class="plan-card">
+                <h2>Standard Plan</h2>
+                <div class="price">$14.99/month</div>
+                <ul class="features">
+                    <li>All Basic features</li>
+                    <li>Download music for offline listening</li>
+                    <li>Listen on multiple devices</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+            </div>
+
+            <div class="plan-card">
+                <h2>Premium Plan</h2>
+                <div class="price">$19.99/month</div>
+                <ul class="features">
+                    <li>All Standard features</li>
+                    <li>Exclusive content</li>
+                    <li>High-quality audio</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 AstraPlay. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

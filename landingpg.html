@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraPlay - Your Ultimate Music Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('thom-schneider-iSYYLt2rKac-unsplash.jpg') no-repeat center center; // Updated background image
+            background-size: cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Floating effect for the logo */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .welcome {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .sub-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+       
+
+        .cta-button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #0000FF, #00BFFF);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00BFFF;
+        }
+
+        /* Features section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 80px 0;
+            background: #0a0a0a;
+        }
+
+        .feature {
+            text-align: center;
+            max-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #00BFFF;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Wave effect at the bottom */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('https://raw.githubusercontent.com/your-username/your-repo/main/wave.svg');
+            background-size: 1000px 100px;
+        }
+
+        .wave.wave1 {
+            animation: animate 30s linear infinite;
+            z-index: 1000;
+            opacity: 1;
+            animation-delay: 0s;
+            bottom: 0;
+        }
+
+        .wave.wave2 {
+            animation: animate2 15s linear infinite;
+            z-index: 999;
+            opacity: 0.5;
+            animation-delay: -5s;
+            bottom: 10px;
+        }
+
+        .wave.wave3 {
+            animation: animate 30s linear infinite;
+            z-index: 998;
+            opacity: 0.2;
+            animation-delay: -2s;
+            bottom: 15px;
+        }
+
+        .wave.wave4 {
+            animation: animate2 5s linear infinite;
+            z-index: 997;
+            opacity: 0.7;
+            animation-delay: -5s;
+            bottom: 20px;
+        }
+
+        @keyframes animate {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1000px; }
+        }
+
+        @keyframes animate2 {
+            0% { background-position-x: 0; }
+            100% { background-position-x: -1000px; }
+        }
+
+        /* Mobile-friendly styles */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 0 10px;
+            }
+
+            .welcome {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 2.5rem;
+            }
+
+            .sub-tagline {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .nav-logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            nav a {
+                margin: 10px 0;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+            }
+
+            .feature {
+                margin-bottom: 40px;
+            }
+
+            .wave {
+                height: 50px;
+                background-size: 500px 50px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="ap-logo.png" alt="AstraPlay Logo" class="nav-logo" id="nav-toggle">
+        <div class="nav-links" id="nav-links">
+            <a href="#home">Home</a>
+            <a href="https://acousticastramusic.co.za/artists">Discover</a>
+            <a href="#library">Library</a>
+            <a href="premium.html">Premium</a>
+            <a href="signup-in.html">Sign In</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h2 class="welcome">Welcome to AstraPlay</h2>
+            <h1 class="tagline">Your Universe of Music</h1>
+            <p class="sub-tagline">Discover, stream, and share songs released under AcousticAstra Music Group.</p>
+            <button class="cta-button" onclick="location.href='signup-in.html'">Start Listening Free</button>
+        </div>
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="wave wave4"></div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <div class="feature-icon">🎵</div>
+            <h2 class="feature-title">AcousticAstra Catalog</h2>
+            <p class="feature-description">Listen to all songs released under AcousticAstra Music Group.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📱</div>
+            <h2 class="feature-title">Listen Anywhere</h2>
+            <p class="feature-description">Stream AcousticAstra music on your smartphone, tablet, or computer.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🎨</div>
+            <h2 class="feature-title">Curated Playlists</h2>
+            <p class="feature-description">Enjoy playlists featuring AcousticAstra artists and releases.</p>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.padding = '15px 20px';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+                navbar.style.padding = '20px';
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Toggle mobile menu
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

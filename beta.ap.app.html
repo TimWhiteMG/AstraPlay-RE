@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraPlay - Music Streaming Platform</title>
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f7;
+            color: #333;
+            overflow: hidden; /* Prevent scrollbars for a cleaner look */
+        }
+
+        /* Header Section */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Main Content Area */
+        .main {
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 60px;
+        }
+
+        /* Album Art Grid */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .album-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .album-card img {
+            width: 100%;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .album-card h3 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .album-card p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .album-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-player img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+        }
+
+        .music-info {
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .music-info h3 {
+            margin: 0;
+        }
+
+        .music-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .controls button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .controls button:hover {
+            background-color: #45a049;
+        }
+
+        .progress-bar {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .progress-bar input[type="range"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">AstraPlay</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Browse</a>
+            <a href="#">Library</a>
+            <a href="#">Profile</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Music Library</h1>
+        <div class="album-grid">
+            <div class="album-card" onclick="playTrack(0)">
+                <img src="https://via.placeholder.com/200x200" alt="Album Art 1">
+                <h3>Song Title 1</h3>
+                <p>Artist 1</p>
+            </div>
+            <div class="album-card" onclick="playTrack(1)">
+                <img src="https://via.placeholder.com/200x200" alt="Album Art 2">
+                <h3>Song Title 2</h3>
+                <p>Artist 2</p>
+            </div>
+            <div class="album-card" onclick="playTrack(2)">
+                <img src="https://via.placeholder.com/200x200" alt="Album Art 3">
+                <h3>Song Title 3</h3>
+                <p>Artist 3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <img id="albumArt" src="https://via.placeholder.com/50" alt="Album Art">
+        <div class="music-info">
+            <h3 id="trackTitle">Track Title</h3>
+            <p id="artistName">Artist Name</p>
+        </div>
+        <div class="controls">
+            <button onclick="prevTrack()">&#9664;</button>
+            <button onclick="playPauseTrack()">Play</button>
+            <button onclick="nextTrack()">&#9654;</button>
+        </div>
+        <div class="progress-bar">
+            <input type="range" id="progressBar" value="0" max="100" onchange="setTrackProgress()">
+        </div>
+    </div>
+
+    <script>
+        const tracks = [
+            {
+                title: "Song Title 1",
+                artist: "Artist 1",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                albumArt: "https://via.placeholder.com/200"
+            },
+            {
+                title: "Song Title 2",
+                artist: "Artist 2",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                albumArt: "https://via.placeholder.com/200"
+            },
+            {
+                title: "Song Title 3",
+                artist: "Artist 3",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                albumArt: "https://via.placeholder.com/200"
+            }
+        ];
+
+        let currentTrack = 0;
+        const audioPlayer = new Audio(tracks[currentTrack].src);
+        const trackTitle = document.getElementById('trackTitle');
+        const artistName = document.getElementById('artistName');
+        const albumArt = document.getElementById('albumArt');
+        const progressBar = document.getElementById('progressBar');
+
+        function loadTrack(trackIndex) {
+            currentTrack = trackIndex;
+            audioPlayer.src = tracks[trackIndex].src;
+            trackTitle.innerText = tracks[trackIndex].title;
+            artistName.innerText = tracks[trackIndex].artist;
+            albumArt.src = tracks[trackIndex].albumArt;
+            audioPlayer.load();
+        }
+
+        function playTrack(trackIndex) {
+            loadTrack(trackIndex);
+            audioPlayer.play();
+        }
+
+        function playPauseTrack() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        }
+
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % tracks.length;
+            loadTrack(currentTrack);
+            audioPlayer.play();
+        }
+
+        function prevTrack() {
+            currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+            loadTrack(currentTrack);
+            audioPlayer.play();
+        }
+
+        function setTrackProgress() {
+            const seekTo = audioPlayer.duration * (progressBar.value / 100);
+            audioPlayer.currentTime = seekTo;
+        }
+
+        audioPlayer.addEventListener('timeupdate', function () {
+            const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressBar.value = progressPercent;
+        });
+
+        audioPlayer.addEventListener('ended', function () {
+            nextTrack();
+        });
+    </script>
+</body>
+</html>

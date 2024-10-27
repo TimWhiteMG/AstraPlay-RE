@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraPlay - Sign Up or Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-image.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.8em;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin-bottom: 20px;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        button {
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 204, 0.4);
+        }
+        .switch {
+            text-align: center;
+            margin-top: 30px;
+            color: #ffffff;
+        }
+        .switch a {
+            color: #ff00cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .switch a:hover {
+            text-shadow: 0 0 10px rgba(255, 0, 204, 0.7);
+        }
+        .techxsd-login {
+            background: linear-gradient(45deg, #00aaff, #0066cc);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            border-radius: 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .techxsd-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #ff00cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to AstraPlay</h1>
+        <form id="authForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" id="submitBtn">Sign Up</button>
+        </form>
+        <div class="techxsd-login" id="techxsdLoginBtn">
+           <span>Sign in with TechXSD Labs</span>
+        </div>
+        <input type="password" id="techxsdPinInput" placeholder="Enter XD0000 PIN" maxlength="6">
+        <input type="password" id="xdProgramAccessInput" placeholder="Enter XD Program Access Code" maxlength="8" style="display: none;">
+        <div class="switch">
+            <p>Already have an account? <a href="#" id="switchBtn">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Modal for thank-you message -->
+    <div id="thankYouModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Thank You!</h2>
+            <p>You have been added to the waiting list. We will email you when the app is launched!</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('authForm');
+        const thankYouModal = document.getElementById('thankYouModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const emailField = document.getElementById('email');
+        const submitBtn = document.getElementById('submitBtn');
+        const switchBtn = document.getElementById('switchBtn');
+        const techxsdLoginBtn = document.getElementById('techxsdLoginBtn');
+        const techxsdPinInput = document.getElementById('techxsdPinInput');
+        const xdProgramAccessInput = document.getElementById('xdProgramAccessInput');
+        let isSignUp = true;
+
+        switchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                emailField.style.display = 'block';
+                submitBtn.textContent = 'Sign Up';
+                switchBtn.textContent = 'Login';
+            } else {
+                emailField.style.display = 'none';
+                submitBtn.textContent = 'Login';
+                switchBtn.textContent = 'Sign Up';
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (isSignUp) {
+                thankYouModal.style.display = 'flex';
+                setTimeout(() => {
+                    window.location.href = 'landingpg.html';
+                }, 3000); // Redirects after 3 seconds
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            thankYouModal.style.display = 'none';
+            window.location.href = 'landingpg.html';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === thankYouModal) {
+                thankYouModal.style.display = 'none';
+                window.location.href = 'landingpg.html';
+            }
+        });
+
+        techxsdLoginBtn.addEventListener('click', () => {
+            techxsdPinInput.style.display = 'block';
+        });
+
+        function validateTechXSDPin(inputValue) {
+            if (inputValue.startsWith('XD') && inputValue.length === 6) {
+                const codeNumber = parseInt(inputValue.slice(2));
+                if (codeNumber >= 986 && codeNumber <= 999) {
+                    console.log('TechXSD Labs staff authenticated');
+                    techxsdPinInput.style.display = 'none';
+                    xdProgramAccessInput.style.display = 'block';
+                    const xdLangProgram = `<xd a09> ${Math.random().toString(36).substring(7)}>`;
+                    console.log('XDLang Program:', xdLangProgram);
+                } else {
+                    console.log('Invalid TechXSD Labs code');
+                }
+            }
+        }
+
+        techxsdPinInput.addEventListener('input', (e) => {
+            const inputValue = e.target.value;
+            if (inputValue.length === 6) {
+                validateTechXSDPin(inputValue);
+            }
+        });
+    </script>
+</body>
+</html>
